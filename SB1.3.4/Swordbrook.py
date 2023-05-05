@@ -1,22 +1,31 @@
+
+#This section is for importing existing python libraries.
+#---------------------------------------------------This section is for importing existing python modules----------------------------------------------------------#
 import random, csv, os, sys, time
 import pandas as pd
+#------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
+#---------------This section find and storing the current location of the program so that it can reference other files & modules in it's directory-----------------#
 scriptDirectoryPath = os.path.dirname(__file__)#Finds path to to this file. "Swordbrook(versionNumber).py"
 #print(scriptDirectoryPath)#This line is used to verify that the path to the file where the main Swordbrook(versionNumber).py script is has been sourced correctly. Only uncomment for debugging.
 sys.path.append(scriptDirectoryPath)#This line adds the swordbrook directory to the system path. this action is cleaned up whenever the program exits properly.
+#------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
+#----------------------------------------------This section is for importing custom modules made for this program--------------------------------------------------#
 import MonsterModule as Monst
 import CharacterModule as Char
 import CharacterFileEditingAndIO as FE
+#------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
+ 
+#---------------------This section defines the mechanics for the main menu. It is called first before the game instance method is called---------------------------#
 def main_menu():
-    stillPlaying = True
+    stillPlaying = True 
     menuEntryAttempts = 0
     while ((menuEntryAttempts in range(10)) and stillPlaying == True):
         #print('Pass number ' + str(menuEntryAttempts))#COMMENT ME AFTER DEBUG!
         
         MainState = str(input('Would you like to "play" , "reset" , or "exit" \n'))
-        #MainState = MainState.lower() 
         if (MainState.lower() == "play" or MainState.lower() == "p"):
             currentGame = game() #Creates an instance of the class game for use during this session of play and executes it's initialization function.
             currentGame.session()#Calls the "session" function in game which will contain the primary game loop.
@@ -38,10 +47,10 @@ def main_menu():
             print('invalid input please enter "play" , "reset", or "exit"' + '\n \n')
             menuEntryAttempts += 1
     return
- 
+#------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
-#==========================================================================================================
 
+#-----------------------------The game class contains the primary game loop, login function, and introduction to the world/game------------------------------------#
 class game(object):
     def __init__(self):
         #print("I have entered the game function init")#COMMENT ME AFTER DEBUG!
@@ -87,12 +96,12 @@ class game(object):
         FE.characterFileManager.NameInputValidation(self, self.currentName)
         self.currentNameIndex = []      
         
-        ############added Space for debug################
+        ############Optional debug code for checking variable values################
         # print(self.currentName)
         # print(self.CharacterFile)
         # doesCurrentNameExist = FE.characterFileManager.DoesCharExist(self, self.currentName,self.CharacterFile)
         # print(doesCurrentNameExist)
-        ##################################################
+        ############################################################################
         
         #try:
         if(self.currentName == ''):
@@ -139,7 +148,7 @@ class game(object):
                     print ('invalid input')
                     newLoginLoop += 1
         return()
-        # except:
+        #except:
             # print ('File IO error detected. Potential Malicious input entry. Exiting...')
             # time.sleep(1)
             # print ('3')
@@ -158,6 +167,7 @@ class game(object):
                 # sys.stdout.write(char)
                 # sys.stdout.flush()
                 # time.sleep(4.0)
+#------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
         
 
@@ -166,12 +176,11 @@ class game(object):
 
 
  
-#========================================================================================================== 
- 
+#------------------Main function for program. By having it only call the main function additinal programs or options could be added later--------------------------# 
 def main():
     #Kept for maybe intro bit #game.prettyPrint('SwordbrookStoryIntro.rtf')
     main_menu()
-    
+#------------------------------------------------------------------------------------------------------------------------------------------------------------------#    
     
 if __name__ == "__main__":
     main()
