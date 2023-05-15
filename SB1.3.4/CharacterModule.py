@@ -1,18 +1,25 @@
+#---------------------------------------------------This section is for importing existing python modules----------------------------------------------------------#
 import time
-#import Swordbrook as SB
+#------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+
+#---------------This section find and storing the current location of the program so that it can reference other files & modules in it's directory-----------------#
 from Swordbrook import game
 import MonsterModule as Monst
 import CharacterFileEditingAndIO as FE
+#------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
+#---------------------This section defines the mechanics for the main menu. It is called first before the game instance method is called---------------------------#
 class Character(game):
-    #def __init__():#(self, name, health, attack, defense):
-        #self.name = name
-        #self.health = health
-        #self.attack = attack
-        #self.defense = defense
-
-    #def __str__(self):
-    #    return(f'{self.name} - Health: {self.health} | Attack: {self.attack} | Defense: {self.defense}')
+    
+#---#This block contains a currently unneeded
+    # |#def __init__():#(self, name, health, attack, defense):
+    # |    #self.name = name
+    # |    #self.health = health
+    # |    #self.attack = attack
+    # |    #self.defense = defense
+    # |
+    # |#def __str__(self):
+    # |#    return(f'{self.name} - Health: {self.health} | Attack: {self.attack} | Defense: {self.defense}')
 
     def makeNewCharacter(self, characterName):
         makeNewCharacterloop = 0

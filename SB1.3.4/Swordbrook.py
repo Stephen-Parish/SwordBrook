@@ -1,5 +1,3 @@
-
-#This section is for importing existing python libraries.
 #---------------------------------------------------This section is for importing existing python modules----------------------------------------------------------#
 import random, csv, os, sys, time
 import pandas as pd
