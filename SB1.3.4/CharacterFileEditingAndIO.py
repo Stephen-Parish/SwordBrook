@@ -51,12 +51,17 @@ class characterFileManager:
             return 
 
     def FirstLoginCheck(self): #This function checks to see if there is atleast one character is logged in by checking the active characters dataframe.
-        while(str(len(self.activeCharDF)) == '0'): #In the event that there ar eno currently logged in characters this loop gives the player an unlimited number of attempts to either continue playing and enter the login function or exit the game.
+        while(str(len(self.activeCharDF)) == '0'): #In the event that there are no currently logged in characters this loop gives the player an unlimited number of attempts to either continue playing and enter the login function or exit the game.
             print("There are currently no characters logged in. You will need to create or login wtih atleast 1 character to play the game\n")
             userResponse1 = (str(input("Would you like to keep playing? yes/no" + "\n"))).lower()
             if(userResponse1 == 'y' or userResponse1 == 'yes'):
                 self.login
             elif (userResponse1 == 'n' or userResponse1 == 'no'):
+                time.sleep(1)
+                print("Shutting down...")
+                time.sleep(2)
+                print("Please play again soon!")
+                time.sleep(1)
                 exit()
         return
 #------------------------------------------------------------------------------------------------------------------------------------------------------------------#

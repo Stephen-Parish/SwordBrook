@@ -117,14 +117,14 @@ class Character(game):
             if (str(len(self.activeCharDF)) == 20): #Tracks the number of currently logged in character so that there can be no more than a maximum of twenty
                 print("The party is full! Begining game.")
                 return
-            userResponse1 = (str(input("\n\nWould you like to login another character for your adventuring party? yes/no." + "\n"))).lower()
+            userResponse1 = (str(input("\n\nWould you like to login another character for your adventuring party? yes/no" + "\n"))).lower()
             if (userResponse1 == 'y' or userResponse1 == 'yes'): #Calls login function from game class in main program to login additional characters if player responds yes
                 self.login()
             elif (userResponse1 == 'n' or userResponse1 == 'no'): #returns from function to begin game if user is done adding characters to party
                 print("Party selected! Begining game.")
                 return
             else:
-                print("please answer with \"yes\" or \"no\"")
+                print("\n\n\nIncorrect input. Please answer with \"yes\" or \"no\"")
                 self.buildingPartyCounter += 1
         print("Too many invalid input entries. Returning to main menu...")
         return        

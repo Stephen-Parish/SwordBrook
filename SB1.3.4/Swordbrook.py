@@ -83,7 +83,13 @@ class game(object):
         Char.Character.PartyBuilder(self)
         
         print("Reaching this point verifies that the entire multicharacter login and verificaiton process is working and that character data is being correctly populated into the CSV file acting as a local database for game info. The next step will be to copy the character making code into the Monster Module to automatically generate monster and then link the combat part of the code back to the login part.")
-        
+############################ Just tempt code to keep function from exiting while I write stuff#########################
+        Merp = False
+        while (Merp == False):
+            time.sleep(1)
+            if (input("repond 1:") == "1"):
+                Merp = True
+#############################Remove the above block after combat functions are written#################################        
         
     def login(self):
         #self.activeCharDF = activeCharDF
