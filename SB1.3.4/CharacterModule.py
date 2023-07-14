@@ -29,9 +29,9 @@ class Character(game):
         
         while ((MakeNewCharacterloop in range(10)) and self.makingACharacter == True): #Give player 10 chances to correctly move through the character creation options or return to the main menu
             self.Printer.Clean()
-            self.Printer.PrettyPrintString("New character's name will be: " + characterName + "\n",'fast',clearScreen = False,allLeftJustifiedText = True,isArtOnly = False)
+            self.Printer.PrettyPrintString("New character's name will be: " + characterName + "\n",'fast',clearScreen = False,allLeftJustifiedText = False,isArtOnly = False)
             time.sleep(1)
-            self.Printer.PrettyPrintString("Is this name alright? yes/no or \"back\" to return to previous step.",'fastNoLag',clearScreen = False,allLeftJustifiedText = False,isArtOnly = False)
+            self.Printer.PrettyPrintString("Is this name alright? yes/no or \"back\" to return to previous step.",'fastNoLag',clearScreen = False,allLeftJustifiedText = True,isArtOnly = False)
             userResponse1 = (str(input("\n"))).lower() #This line gives the player an oportunity to confirm that the character name they have entered is correct before it is added to the game.
             
             if (userResponse1 == 'y' or userResponse1 == 'yes'): #If the player answers yes then this code will write a new line to the character file containing that name with fields for the various charachter stats
@@ -114,20 +114,22 @@ class Character(game):
 #----------This functino allows multiple characters to be to loggin simulatniously. This creates a "party" of adventurers for the turnbased combat-----------------#
     def PartyBuilder(self):
         self.buildingPartyCounter = 0
-        self.tempPrintString = ""
-        self.tempPrintList = []
+        
         for self.buildingPartyCounter in range(100): #allows user 100 total chances for logging in new characters before returning to main menu
+            self.tempPrintString = ""
+            self.tempPrintList = []
             self.Printer.Clean()
+            
             self.Printer.PrettyPrintString("\nthere are " + str(len(self.activeCharDF)) + " characters logged in out of a maximum of 20\n",'fast',clearScreen = False,allLeftJustifiedText = False,isArtOnly = False) #displays number of currently logged in characters
             #print(self.activeCharDF)#COMMENT ME AFTER DEBUG!
             self.tempPrintList =(self.activeCharDF['NAME'].tolist())
             #self.tempPrintList.pop(0) #Remove the 0th element from the list because it contains only the name of the column in the dataframe and not an actual character Name Value
             for temporaryIteratorIndexVar in range(len(self.tempPrintList)):
-                if (temporaryIteratorIndexVar == len(self.tempPrintList)):
-                    self.tempPrintString += str(self.tempPrintList[temporaryIteratorIndexVar] + " .")
+                if (temporaryIteratorIndexVar == len(self.tempPrintList)-1):
+                    self.tempPrintString += str(self.tempPrintList[temporaryIteratorIndexVar] + ".")
                 else:
                     self.tempPrintString += str(self.tempPrintList[temporaryIteratorIndexVar] + ", ")
-               
+                    
             self.Printer.PrettyPrintString("The currently logged in users are:" + self.tempPrintString,'fast',clearScreen = False,allLeftJustifiedText = False,isArtOnly = False)
             #print("The currently logged in users are", *self.tempPrintList, sep =', ') #Displays list of all currently logged in characters seperated by commas #This is the old method before converting to string so that I could use PrettyPrintString
             #print(str(len(self.activeCharDF)))#COMMENT ME AFTER DEBUG!
@@ -138,7 +140,7 @@ class Character(game):
                 return
             
             
-            self.Printer.PrettyPrintString("\n\nWould you like to login another character for your adventuring party? yes/no",'slow',clearScreen = False,allLeftJustifiedText = False,isArtOnly = False)
+            self.Printer.PrettyPrintString("\n\nWould you like to login another character for your adventuring party? yes/no\n",'fast',clearScreen = False,allLeftJustifiedText = False,isArtOnly = False)
             userResponse1 = (str(input("\n"))).lower()
             if (userResponse1 == 'y' or userResponse1 == 'yes'): #Calls login function from game class in main program to login additional characters if player responds yes
                 self.login()
