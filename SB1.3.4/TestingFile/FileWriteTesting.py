@@ -2,11 +2,16 @@ import csv
 import os
 import sys
 import time
+import textwrap
 import pandas as pd
 
 NameFile = ((os.path.dirname(__file__))+ '/' + 'NameFile.csv')
-SBStory = ((os.path.dirname(__file__))+ '/' + 'SwordbrookStoryIntro.txt')
-
+SBStory = ((os.path.dirname(__file__))+ '/Text' + '/' + 'SwordbrookStoryIntro.txt')
+SBNIntro = ((os.path.dirname(__file__))+ '/Text' + '/' + 'SwordbrookNarratorIntro.txt')
+SF = ((os.path.dirname(__file__))+ '/' + '/Text' + 'ShortFile.txt')
+SBLogo = ((os.path.dirname(__file__))+ '/Text' + '/' + 'SwordBrookLogo.txt')
+SBLogoT = ((os.path.dirname(__file__))+ '/Text' + '/' + 'SwordBrookLogoTest.txt')
+SBLogoTNT = ((os.path.dirname(__file__))+ '/Text' + '/' + 'SwordBrookLogoTestNotTxt')
 
 # def referencecodenotmine():
     # with open('eggs.csv', 'w', newline='') as csvfile:
@@ -87,19 +92,194 @@ def editfile():
 ###########################################################The Function below will be used to test pretty printing##########################
 ############################################################################################################################################
 
-def PrettyPrint():
+def PrettyPrintDoc(printDoc, printSpeed,clearScreen = True,allLeftJustifiedText = False,isArtOnly = False):
 
-    print("\n")
-    with open(SBStory, 'r+') as StoryIntroFile:
-        for char in StoryIntroFile:
-            printStr = str(char)
-            for character in printStr:
-                print(character, end='') 
-                sys.stdout.flush() 
-                time.sleep(0.075)
-            time.sleep(5)
-            clean() 
+    #####################Define local variables not given by arguments########################    
+    artPrintFlag = False
+    leftJustifiedTextFlag = False
+    clearScreenFlag = True
+    terminalSizeTuple = os.get_terminal_size()  
+    ##########################################################################################    
     
+    
+    #####Set local vaiables for print speed and paragraph pauses from functino arguments######
+    
+    if (printSpeed == 'slow'):
+        speed = 0.065
+        hangtime = 5
+    elif (printSpeed == 'fast'):
+        speed = 0.020
+        hangtime = 2
+    elif (printSpeed == 'veryfast'):
+        speed = 0.0001
+        hangtime = 2
+    elif (printSpeed == 'instant'):
+        speed = 0.000
+        hangtime = 4
+    elif (printSpeed == 'slownolag'):
+        speed = 0.065
+        hangtime = 0.020
+    elif (printSpeed == 'fastNoLag'):
+        speed = 0.020
+        hangtime = 0.020
+    elif (printSpeed == 'veryFastNoLag'):
+        speed = 0.050
+        hangtime = 0.020
+    elif (printSpeed == 'instantNoLag'):
+        speed = 0.000
+        hangtime = 0.005
+    ##########################################################################################
+   
+    if (clearScreen):
+        Clean()
+    with open(printDoc, 'r+') as printText:
+        for char in printText:
+            printStr = str(char)    
+                
+            if (printStr == ' \n'):
+                print('\n')
+                time.sleep(0.01)
+                
+            elif (printStr.lower().startswith('-artprint')):
+                artPrintFlag^=True
+                printStr=''
+            elif (printStr.lower().startswith('-justifytext')):
+                if printStr.endswith('\n'):
+                        printStr = printStr[:-1]
+                if (printStr.lower().endswith('left')):
+                    leftJustifiedTextFlag = True
+                elif (printStr.lower().endswith('center')):
+                    leftJustifiedTextFlag = False
+            
+            elif (printStr.lower().startswith('-clearscreen')):
+                clearScreenFlag^=True
+                printStr=''
+            
+            elif (printStr.lower().startswith('-setprintspeed')):
+                    if printStr.endswith('\n'):
+                        printStr = printStr[:-1]
+                    if (printStr.lower().endswith('slow')):
+                        speed = 0.065
+                        hangtime = 5
+                    elif (printStr.lower().endswith('fast')):
+                        speed = 0.020
+                        hangtime = 2
+                    elif (printStr.lower().endswith('veryfast')):
+                        speed = 0.0001
+                        hangtime = 2
+                    elif (printStr.lower().endswith('instant')):
+                        speed = 0.000
+                        hangtime = 4
+                    elif (printStr.lower().endswith('slownolag')):
+                        speed = 0.065
+                        hangtime = 0.020
+                    elif (printStr.lower().endswith('fastnolag')):
+                        speed = 0.020
+                        hangtime = 0.020
+                    elif (printStr.lower().endswith('veryFastNoLag')):
+                        speed = 0.000001
+                        hangtime = 0.020
+                    elif (printStr.lower().endswith('instantnolag')):
+                        speed = 0.000
+                        hangtime = 0.005
+                    printStr=''
+            
+            elif (printStr != '' and printStr != '\n'):
+                if printStr.endswith('\n'):
+                    printStr = printStr[:-1]
+                if(artPrintFlag==False and isArtOnly==False):
+                    print("\n")
+                    printStr = textwrap.fill(printStr, width=terminalSizeTuple[0])
+                if(len(printStr) <= (terminalSizeTuple[0]-1)):
+                    if (leftJustifiedTextFlag == False and allLeftJustifiedText == False):
+                        printStr = printStr.center(terminalSizeTuple[0]) 
+                for character in printStr:
+                    print(character, end='') 
+                    sys.stdout.flush() 
+                    time.sleep(speed)
+                time.sleep(hangtime)
+                if (clearScreen and clearScreenFlag):
+                    Clean()
+            
+            
+            else:
+                time.sleep(0.001)
+                if (clearScreen and clearScreenFlag):
+                    Clean()
+                
+def PrettyPrintString(printDoc, printSpeed,clearScreen = True,allLeftJustifiedText = False,isArtOnly = False):
+
+    #####################Define local variables not given by arguments########################    
+    terminalSizeTuple = os.get_terminal_size()  
+    ##########################################################################################
+
+    if (printSpeed == 'slow'):
+        speed = 0.065
+        hangtime = 5
+    elif (printSpeed == 'fast'):
+        speed = 0.020
+        hangtime = 2
+    elif (printSpeed == 'veryfast'):
+        speed = 0.0001
+        hangtime = 2
+    elif (printSpeed == 'instant'):
+        speed = 0.000
+        hangtime = 4
+    elif (printSpeed == 'slownolag'):
+        speed = 0.065
+        hangtime = 0.020
+    elif (printSpeed == 'fastNoLag'):
+        speed = 0.020
+        hangtime = 0.020
+    elif (printSpeed == 'veryFastNoLag'):
+        speed = 0.050
+        hangtime = 0.020
+    elif (printSpeed == 'instantNoLag'):
+        speed = 0.000
+        hangtime = 0.005
+    
+    if (clearScreen):
+        self.Clean()
+    
+    printStr = str(stringToPrint)
+    if (printStr != '' and printStr != '\n' and printStr != ' \n'):
+        if(isArtOnly==False):
+            print("\n")
+            printStr = textwrap.fill(printStr, width=terminalSizeTuple[0])
+        if(len(printStr) <= (terminalSizeTuple[0]-1)):
+            if (allLeftJustifiedText == False):
+                printStr = printStr.center(terminalSizeTuple[0]) 
+        for character in printStr:
+            print(character, end='') 
+            sys.stdout.flush() 
+            time.sleep(speed)
+        time.sleep(hangtime)
+        if (clearScreen):
+            Clean()
+
+    elif(printStr == ' \n' or '\n'):
+        print('\n')
+        time.sleep(0.01)
+    
+    else:
+        time.sleep(0.001)
+        if (noClear ==  False):
+            self.Clean()
+
+def Clean():
+    # For Windows
+    if os.name == 'nt':
+        os.system('cls')
+
+    # For macOS and Linux
+    else:
+        os.system('clear')
+    
+# def PrintafileTest():
+    # with open(SBLogo, 'r+') as printText:
+        # text = printText.read
+        # print(text)
+
         
         
         
@@ -115,14 +295,14 @@ def PrettyPrint():
 ###########################################################The Function below will be used to test pretty printing##########################
 ############################################################################################################################################
 
-def clean():
-    # For Windows
-    if os.name == 'nt':
-        os.system('cls')
+# def Clean():
+    # # For Windows
+    # if os.name == 'nt':
+        # os.system('cls')
 
-    # For macOS and Linux
-    else:
-        os.system('clear')
+    # # For macOS and Linux
+    # else:
+        # os.system('clear')
 
 ############################################################################################################################################
 
@@ -130,8 +310,8 @@ def clean():
 
 
 
-
-
+#def TinyFunc():
+#    variable = 'AAA bbb ccc ddd'
 
 
 
@@ -171,11 +351,18 @@ def clean():
 ############################################################################################################################################
 ###############################################Function calls###############################################################################
 ############################################################################################################################################
-PrettyPrint()
 
-MkFile()
-editfile()
-    
+
+PrettyPrintDoc(SBLogo,'instantNoLag',True,False,False)
+time.sleep(5)
+#PrettyPrintDoc(SBStory,'slow')
+#stringThatImGonnaPrint = "\nThis is a long string that should prove the formating for the string version of the pretty printing function is working correctly"
+#PrettyPrintString(stringThatImGonnaPrint,'slow')
+#PrintafileTest()
+
+#MkFile()
+#editfile()
+#TinyFunc()   
 #############################################^Function calls^###############################################################################    
     
     
@@ -194,3 +381,10 @@ editfile()
         # for row in reader:
                 # content = list(row[i] for i in included_cols)
                 # print content
+                
+# print('     _                                                                    __   ')
+# print('    | |            _____                 _ _               _              \ \  ')
+# print(' ___| |_____ _____|   __|_ _ _ ___ ___ _| | |_ ___ ___ ___| |_ _____ _____ \ \ ')
+# print('|___| |_____|_____|__   | | | | . |  _| . | . |  _| . | . | \'_|_____|_____| > >')
+# print('    | |_____|_____|_____|_____|___|_| |___|___|_| |___|___|_,_|_____|_____|/ / ')
+# print('    |_|                                                                   /_/  ')
