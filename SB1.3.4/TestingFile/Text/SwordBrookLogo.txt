@@ -1,0 +1,50 @@
+     ____________________________________________________    
+    |                                                    |   
+    |                                                    |   
+    |                                                    |   
+    |                                                    |   
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  
+-clearscreen
+-justifyText left
+This is some examp text that will demonstrate the functionality. This is some examp text that will demonstrate the functionality. This is some examp text that will demonstrate the functionality. This is some examp text that will demonstrate the functionality. This is some examp text that will demonstrate the functionality. This is some examp text that will demonstrate the functionality. This is some examp text that will demonstrate the functionality. This is some examp text that will demonstrate the functionality. This is some examp text that will demonstrate the functionality. 
+This is some examp text that will demonstrate the functionality. This is some examp text that will demonstrate the functionality. This is some examp text that will demonstrate the functionality. This is some examp text that will demonstrate the functionality. This is some examp text that will demonstrate the functionality. This is some examp text that will demonstrate the functionality. 
+This is some examp text that will demonstrate the functionality. This is some examp text that will demonstrate the functionality. 
+
+
+
+This is some examp text that will demonstrate the functionality. This is some examp text that will demonstrate the functionality. This is some examp text that will demonstrate the functionality. 
+This is some examp text that will demonstrate the functionality. 
+ 
+-justifyText center
+-setprintspeed veryfastnolag
+-artprint
+
+
+      #######                                                  ##      /                                        /        
+    /       ###                                                 ##   #/                                       #/         
+   /         ##                                                 ##   ##                                       ##         
+   ##        # ##                                               ##   ##                                       ##         
+    ###        ##                                               ##   ##                                       ##         
+   ## ###       ##    ###    ####      /###   ###  /###     ### ##   ## /###   ###  /###     /###     /###    ##  /##    
+    ### ###      ##    ###     ###  / / ###  / ###/ #### / ######### ##/ ###  / ###/ #### / / ###  / / ###  / ## / ###   
+      ### ###    ##     ###     ###/ /   ###/   ##   ###/ ##   ####  ##   ###/   ##   ###/ /   ###/ /   ###/  ##/   /    
+        ### /##  ##      ##      ## ##    ##    ##        ##    ##   ##    ##    ##       ##    ## ##    ##   ##   /     
+          #/ /## ##      ##      ## ##    ##    ##        ##    ##   ##    ##    ##       ##    ## ##    ##   ##  /      
+           #/ ## ##      ##      ## ##    ##    ##        ##    ##   ##    ##    ##       ##    ## ##    ##   ## ##      
+            # /  ##      ##      ## ##    ##    ##        ##    ##   ##    ##    ##       ##    ## ##    ##   ######     
+  /##        /   ##      /#      /  ##    ##    ##        ##    /#   ##    /#    ##       ##    ## ##    ##   ##  ###    
+ /  ########/     ######/ ######/    ######     ###        ####/      ####/      ###       ######   ######    ##   ### / 
+/     #####        #####   #####      ####       ###        ###        ###        ###       ####     ####      ##   ##/  
+|                                                                                                                        
+ \)                                                                                                                      
+
+-artprint
+-setprintspeed veryfast	
+-justifyText left
+
+
+This is some examp text that will demonstrate the functionality. This is some examp text that will demonstrate the functionality. This is some examp text that will demonstrate the functionality. This is some examp text that will demonstrate the functionality. This is some examp text that will demonstrate the functionality. This is some examp text that will demonstrate the functionality. This is some examp text that will demonstrate the functionality. This is some examp text that will demonstrate the functionality. This is some examp text that will demonstrate the functionality. 
+This is some examp text that will demonstrate the functionality. This is some examp text that will demonstrate the functionality. This is some examp text that will demonstrate the functionality. This is some examp text that will demonstrate the functionality. This is some examp text that will demonstrate the functionality. This is some examp text that will demonstrate the functionality. 
+This is some examp text that will demonstrate the functionality. This is some examp text that will demonstrate the functionality. 
+This is some examp text that will demonstrate the functionality. This is some examp text that will demonstrate the functionality. This is some examp text that will demonstrate the functionality. 
+This is some examp text that will demonstrate the functionality.

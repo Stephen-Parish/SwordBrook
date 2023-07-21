@@ -1,0 +1,29 @@
+
+ 
+ 
+Swordbrook is a text based RPG where players can advance through a short story battling random monsters and improving thier stats
+-clean
+ 
+ 
+in this game you will have many opotunities to control the actions you take and the way your characters skills develop
+-clean
+ 
+ 
+These changes will usually be presented in the form of a prompt like:
+"What would you like to name your character?"
+-setprintspeed veryfastnolag
+or
+-setprintspeed fast
+"What would you like to call the magical sword?"
+For open ended prompts like these you can type any chosen answer you would like into the terminal and then press enter to submit it.
+-clean
+
+Alternatively, some prompts may present you with specific options to choose from like:
+"What would you like to do? 'Attack', 'Block', 'Cast' a spell, or use an 'Item'"
+-setprintspeed veryfastnolag
+or
+-setprintspeed fast
+"What class will your character choose to advance thier skills in? 'Swordsman', 'Archer', or 'Mage'"
+In these instances you can choose an option by exactly typing any of the selections surrounded by single qoutation marks end then pressing enter to submit it.
+ 
+ 
