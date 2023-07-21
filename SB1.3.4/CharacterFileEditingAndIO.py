@@ -12,7 +12,7 @@ class characterFileManager():
         with open(CharacterFile, 'w') as CharDatFile: #Creates a new instance of the CharacterFile.csv file to hold user data
             FileWrite = csv.writer(CharDatFile) #Shortens write command by assign to variable
             
-            Column_Titles = ['Name','Class','HP', 'AP'] #Defines the column names for the CSV. Note that this does not include the index of each column in the dataframes made from the data in the CSV which is kept seperately as a value of the dataframe.
+            Column_Titles = ['Name','Class','HP','MP','Arm','Str','Dex', ] #Defines the column names for the CSV. Note that this does not include the index of each column in the dataframes made from the data in the CSV which is kept seperately as a value of the dataframe.
             FileWrite.writerow(Column_Titles)
                             
     def DoesCharExist(self,currentName,CharacterFile):
@@ -46,6 +46,28 @@ class characterFileManager():
                 self.validationCounter += 1
             if (self.validationCounter == 10):
                 self.Printer.PrettyPrintString("Too many invalid character entries attempted!",'fast',clearScreen = True,allLeftJustifiedText = False,isArtOnly = False)
+                time.sleep(1)
+                self.Printer.Clean()
+                self.Printer.PrettyPrintString("Shutting down...",'fast',clearScreen = False,allLeftJustifiedText = False,isArtOnly = False)
+                time.sleep(2)
+                self.Printer.PrettyPrintString("Please play again soon!",'fast',clearScreen = False,allLeftJustifiedText = False,isArtOnly = False)
+                time.sleep(1)
+                exit()
+            return 
+            
+    def InputValidation(self,inputToValidate,queryQuestion): #Compares characters in a name string to a set of lists of allowed characters to determin if name is a valid and non-malicious string.
+        self.validationCounter = 0
+        self.validCharacterList = set((list(string.ascii_lowercase)) + (list(string.ascii_uppercase)) + (list(string.hexdigits)) + ['_','-','~','\''])
+        #print(self.validCharacterList)#COMMENT ME AFTER DEBUG!
+        for self.validationCounter in range(10):
+            if any(char not in self.validCharacterList for char in inputToValidate):
+                Display.Clean()
+                Display.PrettyPrintString("Input must be comprised of only UPPERCASE letters, lowercase letters, numbers, spaces, and the symbols _, -, ~, or '", "\nYou have " + str(10 - self.validationCounter) + " attempts remaining",'fast',clearScreen = False,allLeftJustifiedText = False,isArtOnly = False)
+                Display.PrettyPrintString("Please try again... " + queryQuestion,'fast',clearScreen = False,allLeftJustifiedText = True,isArtOnly = False)
+                self.currentName = (str(input("\n"))).lower()
+                self.validationCounter += 1
+            if (self.validationCounter == 10):
+                self.Printer.PrettyPrintString("Too many invalid entries attempted!",'fast',clearScreen = True,allLeftJustifiedText = False,isArtOnly = False)
                 time.sleep(1)
                 self.Printer.Clean()
                 self.Printer.PrettyPrintString("Shutting down...",'fast',clearScreen = False,allLeftJustifiedText = False,isArtOnly = False)

@@ -38,15 +38,28 @@ class Character(game):
                 self.Printer.PrettyPrintString("Making a New Character!",'fast',clearScreen = True,allLeftJustifiedText = False,isArtOnly = False)
                 newDataRowEntry = [characterName,'0','0','0']
                 self.df.loc[len(self.df)] = newDataRowEntry #appends row containing new character template to last row of dataframe
-                FE.characterFileManager.Write(self,self.df,self.CharacterFile) #calles function to write the character info dataframe to the CharacterFile.csv
-                indexOfCharacterName = self.df.index[self.df['Name'] == characterName].tolist() #writes the index of the row containing the data for the new character to a variable
+                #indexOfCharacterName = self.df.index[self.df['Name'] == characterName] #writes the index of the row containing the data for the new character to a variable
+                indexOfCharacterName = int(self.df[self.df['Name']==characterName].index.values) #writes the index of the row containing the data for the new character to a variable
                 self.activeCharDF.loc[len(self.activeCharDF)] = [characterName,indexOfCharacterName] #Adds character to list of actively logged in characters
-                #print(indexOfCharacterName)!")#COMMENT ME AFTER DEBUG!
-                #print(self.activeCharDF)!")#COMMENT ME AFTER DEBUG!
+                #print(indexOfCharacterName)#COMMENT ME AFTER DEBUG!
+                #print(self.activeCharDF)#COMMENT ME AFTER DEBUG!
                 self.makingACharacter = False #ends character making loop
 
 ######################################################################################################Tempt work frame begin            
                 Character.PickCharacterArchetype(self, characterName, indexOfCharacterName)
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                FE.characterFileManager.Write(self,self.df,self.CharacterFile) #calles function to write the character info dataframe to the CharacterFile.csv
 ######################################################################################################Temp work frame End
                 return
             
@@ -158,18 +171,70 @@ class Character(game):
 
     def PickCharacterArchetype(self, CName, CIndex):
         print("I made it to the class picker!")
+        pickingClass = True
+        counter = 0
         self.Printer.PrettyPrintString("Please select a class from \"Wizard\", \"Swordsman\", \"Archer\" \"Knight\"",'fast',clearScreen = False,allLeftJustifiedText = True,isArtOnly = False)
         self.chosenClass = (str(input("\n")))
-        FE.characterFileManager.NameInputValidation(self, self.currentName)
-
-
+        self.chosenClass = self.chosenClass.lower()
+        FE.characterFileManager.InputValidation(self, self.currentName,"Please select a class from \"Wizard\", \"Swordsman\", \"Archer\" \"Knight\"")
+        
+        while counter in range(10) and pickingClass == True:
+            #print(CIndex)
+            #print(self.df)
+            #print(self.df.iloc[0])
+            #print(self.df.iloc[CIndex])
+            #dataFrameData = self.df[self.df['Name']==CName]
+            #print(dataFrameData)
+            # = self.df[self.df['NAME']==CName]['COUNTRY']
+            #print(self.df.index[self.df['Name']])
+            #print(self.df.index[self.df['Name'] == characterName])
+            
+            
+            if (self.chosenClass == 'w' or self.chosenClass == 'wizard'): #Calls login function from game class in main program to login additional characters if player responds yes
+                self.df.at[CIndex,'Class'] = 'Wizard'
+                self.df.at[CIndex,'HP'] = 'WizHP'
+                self.df.at[CIndex,'AP'] = 'Wizard'
+                temptFillIn = (str(input("Respond1")))
+                return
+            elif (self.chosenClass == 's' or self.chosenClass == 'swordsman'): #returns from function to begin game if user is done adding characters to party
+                self.df.at[CIndex,'Class'] = 'Swordsman'
+                self.df.at[CIndex,'HP'] = 'SwordHP'
+                self.df.at[CIndex,'AP'] = 'SwordAP'
+                pickingClass = False
+                return
+            elif (self.chosenClass == 'a' or self.chosenClass == 'archer'): #returns from function to begin game if user is done adding characters to party
+                self.df.at[CIndex,'Class'] = 'Archer'
+                self.df.at[CIndex,'HP'] = 'ArchHP'
+                self.df.at[CIndex,'AP'] = 'ArchAP'
+                pickingClass = False
+                return
+            elif (self.chosenClass == 'k' or self.chosenClass == 'knight'): #returns from function to begin game if user is done adding characters to party
+                self.df.at[CIndex,'Class'] = 'Knight'
+                self.df.at[CIndex,'HP'] = 'KHP'
+                self.df.at[CIndex,'AP'] = 'KAP'
+                pickingClass = False
+                return
+            elif (self.chosenClass == 'b' or self.chosenClass == 'back'): #returns from function to begin game if user is done adding characters to party
+                self.df.at[CIndex,'Class'] = 'Wizard'
+                self.df.at[CIndex,'HP'] = 'WizHP'
+                self.df.at[CIndex,'AP'] = 'Wizard'
+                pickingClass = False
+                return
+            else:
+                self.Printer.Clean()
+                self.Printer.PrettyPrintString("\n\nInvalid input!",'fast',clearScreen = False,allLeftJustifiedText = False,isArtOnly = False)
+                self.Printer.PrettyPrintString("Please select a class from \"Wizard\", \"Swordsman\", \"Archer\" \"Knight\"",'fast',clearScreen = False,allLeftJustifiedText = True,isArtOnly = False)
+                self.chosenClass = (str(input("\n")))
+                counter += 1
+        print("Too many invalid input entries. Returning to main menu...")
+        return        
 
     def attack_monster(self, monster):
         damage = self.attack - monster.defense
         if damage < 0:
             damage = 0
         monster.health -= damage
-        print(f'{self.name} attacks {monster.name} for {damage} damage!')
+        print(f'{self.name} attacks {monster.name} for {damage} damage!')   
 
     def defend(self):
         self.defense += 5
